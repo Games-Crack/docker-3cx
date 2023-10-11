@@ -9,11 +9,10 @@ LABEL build.date   $BUILD_DATE
 LABEL build.time   $BUILD_TIME
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en
+ENV LANG de_DE.UTF-8
+ENV LANGUAGE de
 ENV container docker
 
-#COPY assets/3cx-archive-keyring.gpg /usr/share/keyrings/
 COPY assets/3cx_fix_perms.service /lib/systemd/system/
 COPY assets/3cx_fix_perms.sh /
 COPY assets/3cxpbx.list /etc/apt/sources.list.d/
@@ -26,7 +25,7 @@ RUN apt-get update -y \
          gnupg2 \
          systemd \
          locales \
-    && sed -i 's/\# \(en_US.UTF-8\)/\1/' /etc/locale.gen \
+    && sed -i 's/\# \de_DE.UTF-8\)/\1/' /etc/locale.gen \
     && locale-gen \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D34B9BFD90503A6B \
     && sed -i '/^#/ s/^#//' /etc/apt/sources.list.d/3cxpbx.list \
